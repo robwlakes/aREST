@@ -42,7 +42,7 @@ template <typename T>
 void send_http_headers(T client){
   client.println(F("HTTP/1.1 200 OK"));
   client.println(F("Content-Type: application/json"));
-  client.println(F("Access-Control-Allow-Origin: *"));//Allows Browsers to accpet the returned information
+  client.println(F("Access-Control-Allow-Origin: *"));//Allows Browsers to accept the returned information
   client.println(F("Connection: close"));
   client.println();  
 }
