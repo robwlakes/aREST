@@ -109,6 +109,14 @@ Then, you need to send this key in the HTTP header of the request:
 
 The repository includes a web-based Graphical User Interface to control an Arduino Uno board from a web browser. To use it, simply put the gui folder at the root of a web server running on your computer, and open the HTML file. You will then be able to select the communication type (WiFi or Serial) and the target (for example, arduino.local if you are using the example WiFi sketch for your board).
 
+##Javascript Example
+
+An application is provided where simple Javascript code can be used to a access the Arduino. This is a proof of concept effort, so few bells and whistles.  However it does show that the aRest library is quite versatile when interacting in this way as considerable power could be built into the Javascript client.  Intitally this concept would would not work on the local network and by adding a line into the header the browser would accept the returned information from the Arduino.  Changing the formoat of this data to also conform to the .json format a also allowed the use of the .json processing provided by Javascript.  The Javascript will need to be editted directly to choose the URL etc. 
+
+##Android Example
+
+Using the [MIT App Inventor](http://ai2.appinventor.mit.edu) it is possible to control the Arduino+aRest through an Android application.  A "source code" is provided.  The system model is a Cat Door that is controlled by the Arduino+aRest and and Android mobile phone.  However again the application is very simple and provided as a proof of concept. The source code file TheCatDoor.aia will need to be imported into a MIT App Inventor account and can then be editted from that application. The App Inventor is an excellent bit of software and compliments the simple, but effective, access through the aRest commands excellently.
+
 ## Troubleshooting
 
 In case you cannot access your Arduino board via the mDNS service (by typing arduino.local in your browser), you need to get the IP address of the board. Upload the sketch to the Arduino board, and then open the Serial monitor. The IP address of the board should be printed out. Simply copy it on a web browser, and you can make REST call like:
