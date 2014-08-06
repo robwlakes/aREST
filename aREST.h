@@ -4,7 +4,7 @@
  
   Written in 2014 by Marco Schwartz under a GPL license. 
 
-  Version 1.4
+  Version 1.4 + robwlakes Suggestions
 
   Changelog:
   Version 1.4: Added authentification with API key
@@ -42,6 +42,7 @@ template <typename T>
 void send_http_headers(T client){
   client.println(F("HTTP/1.1 200 OK"));
   client.println(F("Content-Type: application/json"));
+  client.println(F("Access-Control-Allow-Origin: *"));//Allows Browsers to accpet the returned information
   client.println(F("Connection: close"));
   client.println();  
 }
@@ -424,16 +425,21 @@ void handle_proto(T serial, bool headers)
          }
          else {
 
-           // Apply on the pin      
+           // Apply on the pin
            digitalWrite(pin,value);
  
            // Send feedback to client
-           serial.print(F("{\"message\": \""));
-           serial.print(F("Pin D"));
-           serial.print(pin);
-           serial.print(F(" set to "));
+           //Format this as a .json format so that the names of variables can be used to
+           //request their value.  Uses .json format decoders in higher level languages.
+           //Allows more convenient processing of returned information for GUI's on client
+           serial.print(F("{\"pin\":"));
+           serial.print(pin,DEC);
+           serial.print(F(",\"state\":"));
            serial.print(value);
-           serial.print(F("\", "));
+           serial.print(F("}"));
+           //There probably needs to be a heirarchy of returned message structures so
+           //the client program can sift through returned messages in a logical
+           //fashion.  It would need to be more sophisticated than in this example.
          }
        }
 
